@@ -1,11 +1,10 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { QUOTES_EN, QUOTES_ZH } from "@/lib/quotes";
+import { QUOTES_EN } from "@/lib/quotes";
 import { renderWallpaper, loadImage } from "@/lib/render";
 
 export default function Home() {
-  const [isEnglish, setIsEnglish] = useState(true);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [generatedImage, setGeneratedImage] = useState<string | null>(null);
   const [isGenerating, setIsGenerating] = useState(false);
@@ -13,8 +12,7 @@ export default function Home() {
 
   const previewRef = useRef<HTMLDivElement>(null);
 
-  const quotes = isEnglish ? QUOTES_EN : QUOTES_ZH;
-  const currentQuote = quotes[currentIndex];
+  const currentQuote = QUOTES_EN[currentIndex];
 
   // Load background image
   useEffect(() => {
@@ -25,13 +23,7 @@ export default function Home() {
 
   const handleChooseAnother = () => {
     setGeneratedImage(null);
-    setCurrentIndex((prev) => (prev + 1) % quotes.length);
-  };
-
-  const handleLanguageToggle = () => {
-    setGeneratedImage(null);
-    setIsEnglish(!isEnglish);
-    setCurrentIndex(0);
+    setCurrentIndex((prev) => (prev + 1) % QUOTES_EN.length);
   };
 
   const handleGenerate = async () => {
@@ -41,7 +33,7 @@ export default function Home() {
     try {
       const dataUrl = await renderWallpaper({
         quote: currentQuote,
-        isEnglish,
+        isEnglish: true,
         backgroundImage,
       });
       setGeneratedImage(dataUrl);
@@ -64,16 +56,6 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-zinc-900 text-zinc-100 flex flex-col items-center justify-center p-4">
       <div className="w-full max-w-md space-y-6">
-        {/* Language Toggle - Hidden but functional */}
-        <div className="flex justify-end">
-          <button
-            onClick={handleLanguageToggle}
-            className="text-sm text-zinc-500 hover:text-zinc-300 transition-colors opacity-30 hover:opacity-100"
-          >
-            {isEnglish ? "中文" : "EN"}
-          </button>
-        </div>
-
         {/* Preview or Generated Image */}
         {generatedImage ? (
           <div className="space-y-4">
@@ -85,7 +67,7 @@ export default function Home() {
               />
             </div>
             <p className="text-sm text-zinc-400 text-center">
-              {isEnglish ? "Long-press to save" : "长按保存"}
+              Long-press to save
             </p>
             <div className="flex gap-3">
               <button
@@ -119,10 +101,8 @@ export default function Home() {
                   className="text-center max-w-[70%]"
                   style={{
                     color: "#F0EAD6",
-                    fontFamily: isEnglish
-                      ? "'Times New Roman', Georgia, serif"
-                      : "'SimSun', 'Source Han Serif SC', serif",
-                    fontSize: isEnglish ? "1.75rem" : "1.875rem",
+                    fontFamily: "'Times New Roman', Georgia, serif",
+                    fontSize: "1.75rem",
                     lineHeight: "1.6",
                     marginTop: "30%",
                   }}
