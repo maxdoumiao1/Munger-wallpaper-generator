@@ -1,0 +1,7 @@
+Place your background image here as: bg.png
+
+Requirements:
+- Filename: bg.png
+- Location: /public/bg.png
+- Recommended: Dark, low saturation, not pure black
+- Format: PNG or JPG (will be loaded as bg.png)
