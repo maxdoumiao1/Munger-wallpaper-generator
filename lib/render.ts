@@ -8,7 +8,7 @@ const CANVAS_WIDTH = 1170;
 const CANVAS_HEIGHT = 2532;
 const TEXT_COLOR = "#F0EAD6";
 const TEXT_MAX_WIDTH_RATIO = 0.7;
-const TEXT_VERTICAL_POSITION = 0.55;
+const TEXT_VERTICAL_POSITION = 0.65;
 
 export async function renderWallpaper(options: RenderOptions): Promise<string> {
   const { quote, isEnglish, backgroundImage } = options;

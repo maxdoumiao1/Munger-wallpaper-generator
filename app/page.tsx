@@ -124,7 +124,7 @@ export default function Home() {
                       : "'SimSun', 'Source Han Serif SC', serif",
                     fontSize: isEnglish ? "1.75rem" : "1.875rem",
                     lineHeight: "1.6",
-                    marginTop: "10%",
+                    marginTop: "30%",
                   }}
                 >
                   {currentQuote}
